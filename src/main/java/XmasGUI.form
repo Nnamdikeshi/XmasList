@@ -51,20 +51,20 @@
         </constraints>
         <properties/>
       </component>
-      <component id="8645e" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="8645e" class="javax.swing.JButton" binding="addButton" default-binding="true">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Add"/>
         </properties>
       </component>
-      <component id="65925" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="65925" class="javax.swing.JButton" binding="transferButton">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Transfer"/>
         </properties>
       </component>
       <component id="4ab5e" class="javax.swing.JButton" binding="exitButton" default-binding="true">

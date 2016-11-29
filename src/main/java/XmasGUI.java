@@ -8,8 +8,8 @@ public class XmasGUI {
     private JTextPane NEEDTABLETextPane1;
     private JTextPane WANTTABLETextPane;
     private JTable wantTable;
-    private JButton button1;
-    private JButton button2;
+    private JButton addButton;
     private JButton exitButton;
     private JTextPane welcomeToXmasListTextPane;
+    private JButton transferButton;
 }
