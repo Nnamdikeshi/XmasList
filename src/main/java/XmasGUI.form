@@ -82,7 +82,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Welcome to Xmas List creator V.1!"/>
+          <text value="Welcome to Xmas List creator V.1!!"/>
         </properties>
       </component>
     </children>
