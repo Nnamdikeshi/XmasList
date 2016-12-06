@@ -64,7 +64,7 @@ public class XmasGUI extends JFrame implements WindowListener {
                 }
                 boolean deleted = xmasDataTableModel.deleteRow ( currentRow );
                 if ( deleted ) {
-                    XmasDB.loadAllMovies ( );
+                    XmasDB.loadAllItems( );
                 } else {
                     JOptionPane.showMessageDialog ( rootPane, "Error deleting item" );
                 }
@@ -109,7 +109,4 @@ public class XmasGUI extends JFrame implements WindowListener {
 
     }
 
-    private void createUIComponents () {
-        // TODO: place custom component creation code here
-    }
 }

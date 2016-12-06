@@ -118,12 +118,6 @@ public class XmasDataModel extends AbstractTableModel {
 
 
     @Override
-    //We only want user to be able to edit column 2 - the rating column.
-    //If this method always returns true, the whole table will be editable.
-
-    //TODO how can we avoid using a magic number (if col==3) ) here? This code depends on column 3 being the rating.
-    //This might change if we were to add more data to our table, for example storing names of people who created the review.
-    //TODO To fix: look into table column models, and generate the number columns based on the columns found in the ResultSet.
     public boolean isCellEditable ( int row, int col ) {
         return col == 3;
     }

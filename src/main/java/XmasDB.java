@@ -18,7 +18,7 @@ public class XmasDB {
     public final static int MOVIE_MAX_RATING = 5;
     static final String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     static final String USER = "root";   //TODO replace with your username
-    static final String PASS = "*****";   //TODO replace with your password
+    static final String PASS = "itecitec";   //TODO replace with your password
     static private final String DB_NAME = "xmas";
 
 
@@ -38,7 +38,7 @@ public class XmasDB {
             System.exit ( - 1 );
         }
 
-        if ( ! loadAllMovies ( ) ) {
+        if ( ! loadAllItems( ) ) {
             System.exit ( - 1 );
         }
 
@@ -48,8 +48,7 @@ public class XmasDB {
 
     }
 
-    //Create or recreate a ResultSet containing the whole database, and give it to movieDataModel
-    public static boolean loadAllMovies () {
+    public static boolean loadAllItems() {
 
         try {
 
@@ -65,7 +64,7 @@ public class XmasDB {
 
 
             if ( xmasDataModel == null ) {
-                //If no current movieDataModel, then make one
+
                 xmasDataModel = new XmasDataModel ( rs );
             } else {
                 //Or, if one already exists, update its ResultSet
