@@ -1,19 +1,19 @@
-/**
- * Created by Nnamdi on 12/4/2016.
- */
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class XmasDataModel extends AbstractTableModel {
-    ResultSet resultSet;
+/**
+ * Created by Nnamdi on 12/6/2016.
+ */
+
+public class XmasDataWantModel extends AbstractTableModel{
+    ResultSet wantResultSet;
     private int rowCount = 0;
     private int colCount = 0;
 
-    public XmasDataModel ( ResultSet rs ) {
-        this.resultSet = rs;
+    public XmasDataWantModel ( ResultSet wrs ) {
+        this.wantResultSet = wrs;
         setup ( );
     }
 
@@ -22,7 +22,7 @@ public class XmasDataModel extends AbstractTableModel {
         countRows ( );
 
         try {
-            colCount = resultSet.getMetaData ( ).getColumnCount ( );
+            colCount = wantResultSet.getMetaData ( ).getColumnCount ( );
 
         } catch (SQLException se) {
             System.out.println ( "Error counting columns" + se );
@@ -31,8 +31,8 @@ public class XmasDataModel extends AbstractTableModel {
     }
 
 
-    public void updateResultSet ( ResultSet newRS ) {
-        resultSet = newRS;
+    public void updateResultSet ( ResultSet newWRS ) {
+        wantResultSet = newWRS;
         setup ( );
     }
 
@@ -41,13 +41,13 @@ public class XmasDataModel extends AbstractTableModel {
         rowCount = 0;
         try {
             //Move cursor to the start...
-            resultSet.beforeFirst ( );
+            wantResultSet.beforeFirst ( );
             // next() method moves the cursor forward one row and returns true if there is another row ahead
-            while ( resultSet.next ( ) ) {
+            while ( wantResultSet.next ( ) ) {
                 rowCount++;
 
             }
-            resultSet.beforeFirst ( );
+            wantResultSet.beforeFirst ( );
 
         } catch (SQLException se) {
             System.out.println ( "Error counting rows " + se );
@@ -70,8 +70,8 @@ public class XmasDataModel extends AbstractTableModel {
     public Object getValueAt ( int row, int col ) {
         try {
             //  System.out.println("get value at, row = " +row);
-            resultSet.absolute ( row + 1 );
-            Object o = resultSet.getObject ( col + 1 );
+            wantResultSet.absolute ( row + 1 );
+            Object o = wantResultSet.getObject ( col + 1 );
             return o.toString ( );
         } catch (SQLException se) {
             System.out.println ( se );
@@ -87,28 +87,26 @@ public class XmasDataModel extends AbstractTableModel {
 
         //Make sure newValue is an integer AND that it is in the range of valid ratings
 
-        int newRating;
+        int newWantPriority;
 
         try {
-            newRating = Integer.parseInt ( newValue.toString ( ) );
+            newWantPriority = Integer.parseInt ( newValue.toString ( ) );
 
-            if ( newRating < XmasDB.MOVIE_MIN_RATING || newRating > XmasDB.MOVIE_MAX_RATING ) {
-                throw new NumberFormatException ( "Movie rating must be within the valid range" );
+            if ( newWantPriority < XmasDB.ITEM_MAX_PRIORITY ) {
+                throw new NumberFormatException ( "This list is only for Item's priced below $5,000.00" );
             }
         } catch (NumberFormatException ne) {
-            //Error dialog box. First argument is the parent GUI component, which is only used to center the
-            // dialog box over that component. We don't have a reference to any GUI components here
-            // but are allowed to use null - this means the dialog box will show in the center of your screen.
-            JOptionPane.showMessageDialog ( null, "Try entering a number between " + XmasDB.MOVIE_MIN_RATING + " " + XmasDB.MOVIE_MAX_RATING );
+
+            JOptionPane.showMessageDialog ( null, "Try entering a number between " + XmasDB.ITEM_MAX_PRIORITY );
             //return prevents the following database update code happening...
             return;
         }
 
         //This only happens if the new rating is valid
         try {
-            resultSet.absolute ( row + 1 );
-            resultSet.updateInt ( XmasDB.PRIORITY_COLUMN, newRating );
-            resultSet.updateRow ( );
+            wantResultSet.absolute ( row + 1 );
+            wantResultSet.updateInt ( XmasDB.PRIORITY_COLUMN, newWantPriority );
+            wantResultSet.updateRow ( );
             fireTableDataChanged ( );
         } catch (SQLException e) {
             System.out.println ( "error changing priority " + e );
@@ -125,8 +123,8 @@ public class XmasDataModel extends AbstractTableModel {
     //Delete row, return true if successful, false otherwise
     public boolean deleteRow ( int row ) {
         try {
-            resultSet.absolute ( row + 1 );
-            resultSet.deleteRow ( );
+            wantResultSet.absolute ( row + 1 );
+            wantResultSet.deleteRow ( );
             //Tell table to redraw itself
             fireTableDataChanged ( );
             return true;
@@ -141,12 +139,12 @@ public class XmasDataModel extends AbstractTableModel {
 
         try {
             //Move to insert row, insert the appropriate data in each column, insert the row, move cursor back to where it was before we started
-            resultSet.moveToInsertRow ( );
-            resultSet.updateString ( XmasDB.NAME_COLUMN, name );
-            resultSet.updateInt ( XmasDB.PRICE_COLUMN, price );
-            resultSet.updateInt ( XmasDB.PRIORITY_COLUMN, priority );
-            resultSet.insertRow ( );
-            resultSet.moveToCurrentRow ( );
+            wantResultSet.moveToInsertRow ( );
+            wantResultSet.updateString ( XmasDB.NAME_COLUMN, name );
+            wantResultSet.updateInt ( XmasDB.PRICE_COLUMN, price );
+            wantResultSet.updateInt ( XmasDB.PRIORITY_COLUMN, priority );
+            wantResultSet.insertRow ( );
+            wantResultSet.moveToCurrentRow ( );
             fireTableDataChanged ( );
             return true;
 
@@ -161,7 +159,7 @@ public class XmasDataModel extends AbstractTableModel {
     @Override
     public String getColumnName ( int col ) {
         try {
-            return resultSet.getMetaData ( ).getColumnName ( col + 1 );
+            return wantResultSet.getMetaData ( ).getColumnName ( col + 1 );
         } catch (SQLException se) {
             System.out.println ( "Error fetching column names" + se );
             return "?";
@@ -169,3 +167,5 @@ public class XmasDataModel extends AbstractTableModel {
     }
 
 }
+
+
