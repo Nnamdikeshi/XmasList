@@ -16,7 +16,6 @@ public class XmasGUI extends JFrame implements WindowListener {
     private JTable wantTable;
     private JButton addButton;
     private JButton exitButton;
-    private JTextPane welcomeToXmasListTextPane;
     private JButton transferButton;
     private JRadioButton radioNeed;
     private JRadioButton radioWant;
@@ -24,24 +23,31 @@ public class XmasGUI extends JFrame implements WindowListener {
     private JSpinner prioritySpinner;
     private JTextField txtPriceInput;
     private JButton deleteButton;
+    private JLabel background;
 
     XmasGUI ( final XmasDataNeedModel xmasDataNeedModel, final XmasDataWantModel xmasDataWantModel ) {
 
         super ( "Christmas List Database Application" );
-
+        background.setIcon ( new ImageIcon ( "christmas.jpg" ) );
+        //rootPanel.add(background);
         setContentPane ( rootPanel );
+
+        validate ( );
         pack ( );
         addWindowListener ( this );
         setVisible ( true );
         setDefaultCloseOperation ( WindowConstants.EXIT_ON_CLOSE );
-
+//        String chime = "jingleBells.mp3";
+//        Media hit = new Media (chime);
+//        MediaPlayer mediaPlayer = new MediaPlayer ( hit );
+//        mediaPlayer.play();
 
         //Set up JTables
         needTable.setGridColor ( Color.BLUE );
         needTable.setModel ( xmasDataNeedModel );
 
         wantTable.setGridColor ( Color.YELLOW );
-        wantTable.setModel ( xmasDataWantModel );
+        wantTable.setModel ( xmasDataNeedModel );
 
         //Set up the priority spinner.
         //SpinnerNumberModel constructor arguments: spinner's initial value, min, max, step.
@@ -58,28 +64,28 @@ public class XmasGUI extends JFrame implements WindowListener {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 int currentNeedRow = needTable.getSelectedRow ( );
-                int currentWantRow = wantTable.getSelectedRow ( );
+                //int currentWantRow = wantTable.getSelectedRow ( );
 
-                if ( currentNeedRow == - 1 && currentWantRow == -1) {      // -1 means no row is selected. Display error message.
+                if ( currentNeedRow == - 1 /*&& currentWantRow == -1*/ ) {      // -1 means no row is selected. Display error message.
                     JOptionPane.showMessageDialog ( rootPane, "Please choose an item to delete" );
                 }
-                if (currentNeedRow == 1) {
-                    boolean deletedOne = xmasDataWantModel.deleteRow ( currentNeedRow );
+                boolean deletedOne = xmasDataNeedModel.deleteRow ( currentNeedRow );
 
-                    if ( currentWantRow == 1 ) {
-                        boolean deletedTwo = xmasDataNeedModel.deleteRow ( currentWantRow );
+                //if ( currentWantRow == 1 ) {
+                //boolean deletedTwo = xmasDataNeedModel.deleteRow ( currentWantRow );
 
-                        if ( deletedOne || deletedTwo ) {
+                if ( deletedOne /*|| deletedTwo*/ ) {
                             XmasDB.loadAllItems ( );
                         } else {
                             JOptionPane.showMessageDialog ( rootPane, "Error deleting item" );
                         }
-                    }
-                }}});
+
+            }
+        } );
         addButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                //Get Movie title, make sure it's not blank
+                //Get name, make sure it's not blank
                 String nameData = txtNameInput.getText();
 
                 if (nameData == null || nameData.trim().equals("")) {
@@ -87,12 +93,12 @@ public class XmasGUI extends JFrame implements WindowListener {
                     return;
                 }
 
-                //Get movie year. Check it's a number between 1900 and present year
+                //get price
                 int priceData;
 
                 try {
                     priceData = Integer.parseInt(txtPriceInput.getText());
-                    if (priceData < 5000){
+                    if ( priceData > 5000 ) {
                         throw new NumberFormatException("This Christmas list will only include prices below $5,000.00");
                     }
                 } catch (NumberFormatException ne) {
@@ -106,16 +112,18 @@ public class XmasGUI extends JFrame implements WindowListener {
 
                 System.out.println("Adding " + nameData + " " + priceData + " " + priorityData);
                 if (radioNeed.isSelected ()) {
-                    boolean insertedRow = xmasDataNeedModel.insertRow ( nameData, priceData, priorityData );
+                    boolean insertedNeedRow = xmasDataNeedModel.insertRow ( nameData, priceData, priorityData );
 
-                    if ( ! insertedRow ) {
+                    if ( ! insertedNeedRow ) {
                         JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to  Need list" );
-                    }}
-                    if ( radioWant.isSelected ( ) ) {
-                        boolean insertedrow = xmasDataWantModel.insertRow ( nameData, priceData, priorityData );
-                        if ( ! insertedrow ) {
-                            JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to Want list" );
-                        }}
+                    }
+                }
+                if ( radioWant.isSelected ( ) ) {
+                    boolean insertedWantRow = xmasDataWantModel.insertRow ( nameData, priceData, priorityData );
+                    if ( ! insertedWantRow ) {
+                        JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to Want list" );
+                    }
+                }
                 // If insertedRow is true and the data was added, it should show up in the table, so no need for confirmation message.
             }
 
@@ -158,5 +166,6 @@ public class XmasGUI extends JFrame implements WindowListener {
     public void windowDeactivated ( WindowEvent e ) {
 
     }
+
 
 }

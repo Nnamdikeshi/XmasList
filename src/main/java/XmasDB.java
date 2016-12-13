@@ -4,33 +4,30 @@
 
 import java.sql.*;
 
-
-
-
 public class XmasDB {
     public final static String WANT_TABLE_NAME = "want_list";
     public final static String NEED_TABLE_NAME = "need_list";
-    // Each solver will have a unique ID
-    public final static String PK_COLUMN = "id";
+
+    // Each Product will have a unique ID
+    public final static String PK_COLUMN = "ID";
+
     // A primary key is needed to allow updates to the database on modifications to ResultSet
-    public final static String NAME_COLUMN = "name";
-    public final static String PRICE_COLUMN = "price";
-    public final static String PRIORITY_COLUMN = "riority";
+    public final static String NAME_COLUMN = "Product_Name";
+    public final static String PRICE_COLUMN = "Price";
+    public final static String PRIORITY_COLUMN = "Priority";
     public final static int ITEM_MIN_PRIORITY = 1;
     public final static int ITEM_MAX_PRIORITY = 10;
     static final String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     static final String USER = "root";   //TODO replace with your username
-    static final String PASS = "*****";   //TODO replace with your password
+    static final String PASS = "*******";   //TODO replace with your password
     static private final String DB_NAME = "xmas";
 
-
-    // Name our database
     static Statement statement = null;
     static Connection conn = null;
     static ResultSet nrs = null;
     static ResultSet wrs = null;
 
-    // Create out data model
+    // Create our data model(s)
     private static XmasDataWantModel xmasDataWantModel;
     private static XmasDataNeedModel xmasDataNeedModel;
 
@@ -50,8 +47,7 @@ public class XmasDB {
         }
 
         //If no errors, then start GUI
-        XmasGUI tableGUI;
-        tableGUI = new XmasGUI ( xmasDataNeedModel, xmasDataWantModel);
+        XmasGUI tableGUI = new XmasGUI ( xmasDataNeedModel, xmasDataWantModel );
 
     }
 
@@ -62,28 +58,32 @@ public class XmasDB {
             if ( nrs != null ) {
                 nrs.close ( );
             }
-            if ( wrs !=null ) {
-                wrs.close ();
-            }
 
-            String getSomeData = "SELECT * FROM " + WANT_TABLE_NAME;
-            String getRestData = "SELECT * FROM " + NEED_TABLE_NAME;
+//            String getRestData = "SELECT * FROM " + NEED_TABLE_NAME;
+//            wrs = statement.executeQuery ( getRestData );
+//
+//            if ( wrs !=null ) {
+//                wrs.close ();
+//            }
 
+            String getSomeData = "SELECT * FROM " + NEED_TABLE_NAME;
+            //String getRestData = "SELECT * FROM " + WANT_TABLE_NAME;
             nrs = statement.executeQuery ( getSomeData );
-            wrs = statement.executeQuery ( getRestData );
+            //wrs = statement.executeQuery ( getRestData );
 
 
             if ( xmasDataNeedModel == null ) {
                 xmasDataNeedModel = new XmasDataNeedModel ( nrs );
             }
-            if ( xmasDataWantModel == null ) {
-                xmasDataWantModel = new XmasDataWantModel ( wrs );
-            }
             else {
-                //Or, if one already exists, update its ResultSet
                 xmasDataNeedModel.updateResultSet ( nrs );
-                xmasDataWantModel.updateResultSet ( wrs );
             }
+//            if ( xmasDataWantModel == null ) {
+//                xmasDataWantModel = new XmasDataWantModel ( wrs );
+//            }
+//            else {
+//                xmasDataWantModel.updateResultSet ( wrs );
+//            }
 
             return true;
 
@@ -165,9 +165,9 @@ public class XmasDB {
 
     private static boolean xmasTableTwoExists () throws SQLException {
 
-        String checkWantTablePresentQuery = "SHOW TABLES LIKE '" + WANT_TABLE_NAME + "'";
+        String checkNeedTablePresentQuery = "SHOW TABLES LIKE '" + WANT_TABLE_NAME + "'";
 
-        ResultSet tableTwoRS = statement.executeQuery ( checkWantTablePresentQuery );
+        ResultSet tableTwoRS = statement.executeQuery ( checkNeedTablePresentQuery );
 
         return tableTwoRS.next ( );
 

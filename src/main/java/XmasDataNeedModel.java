@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class XmasDataNeedModel extends AbstractTableModel {
     ResultSet needResultSet;
+    ResultSet wantResultSet;
     private int rowCount = 0;
     private int colCount = 0;
 
@@ -24,9 +25,11 @@ public class XmasDataNeedModel extends AbstractTableModel {
         try {
             colCount = needResultSet.getMetaData ( ).getColumnCount ( );
 
+
         } catch (SQLException se) {
             System.out.println ( "Error counting Need columns" + se );
         }
+
 
     }
 
@@ -92,7 +95,7 @@ public class XmasDataNeedModel extends AbstractTableModel {
         try {
             newNeedPriority = Integer.parseInt ( newValue.toString ( ) );
 
-            if ( newNeedPriority < XmasDB.ITEM_MIN_PRIORITY || newNeedPriority > XmasDB.ITEM_MAX_PRIORITY ) {
+            if ( newNeedPriority >= XmasDB.ITEM_MIN_PRIORITY || newNeedPriority <= XmasDB.ITEM_MAX_PRIORITY ) {
                 throw new NumberFormatException ( "You have to choose an appropriate priority level." );
             }
         } catch (NumberFormatException ne) {
