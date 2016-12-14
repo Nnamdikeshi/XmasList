@@ -19,10 +19,12 @@ public class XmasDB {
     public final static int ITEM_MAX_PRIORITY = 10;
     static final String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     static final String USER = "root";   //TODO replace with your username
-    static final String PASS = "*******";   //TODO replace with your password
+    static final String PASS = "******";   //TODO replace with your password
     static private final String DB_NAME = "xmas";
 
-    static Statement statement = null;
+    static Statement statementWant = null;
+    static Statement statementNeed = null;
+
     static Connection conn = null;
     static ResultSet nrs = null;
     static ResultSet wrs = null;
@@ -55,22 +57,22 @@ public class XmasDB {
 
         try {
 
-            if ( nrs != null ) {
-                nrs.close ( );
-            }
+//            if ( nrs != null ) {
+//                nrs.close ( );
+//            }
 
-//            String getRestData = "SELECT * FROM " + NEED_TABLE_NAME;
-//            wrs = statement.executeQuery ( getRestData );
-//
+
+            String getRestData = "SELECT * FROM " + WANT_TABLE_NAME;
+            wrs = statementWant.executeQuery ( getRestData );
+
 //            if ( wrs !=null ) {
 //                wrs.close ();
 //            }
 
             String getSomeData = "SELECT * FROM " + NEED_TABLE_NAME;
             //String getRestData = "SELECT * FROM " + WANT_TABLE_NAME;
-            nrs = statement.executeQuery ( getSomeData );
+            nrs = statementNeed.executeQuery ( getSomeData );
             //wrs = statement.executeQuery ( getRestData );
-
 
             if ( xmasDataNeedModel == null ) {
                 xmasDataNeedModel = new XmasDataNeedModel ( nrs );
@@ -78,12 +80,12 @@ public class XmasDB {
             else {
                 xmasDataNeedModel.updateResultSet ( nrs );
             }
-//            if ( xmasDataWantModel == null ) {
-//                xmasDataWantModel = new XmasDataWantModel ( wrs );
-//            }
-//            else {
-//                xmasDataWantModel.updateResultSet ( wrs );
-//            }
+            if ( xmasDataWantModel == null ) {
+                xmasDataWantModel = new XmasDataWantModel ( wrs );
+            }
+            else {
+                xmasDataWantModel.updateResultSet ( wrs );
+            }
 
             return true;
 
@@ -110,22 +112,24 @@ public class XmasDB {
 
             conn = DriverManager.getConnection ( DB_CONNECTION_URL + DB_NAME, USER, PASS );
 
-            statement = conn.createStatement ( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE );
+            //Create two statements, and then the results sets from each can be used independently.
+            statementWant = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statementNeed = conn.createStatement ( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE );
 
 
             //Does the table exist? If not, create it.
         if ( ! xmasTableTwoExists ( ) ) {
             String createWantTableSQL = "CREATE TABLE " + WANT_TABLE_NAME + " (" + PK_COLUMN + " int NOT NULL AUTO_INCREMENT, " + NAME_COLUMN + " varchar(50), " + PRICE_COLUMN + " int, " + PRIORITY_COLUMN + " int, PRIMARY KEY(" + PK_COLUMN + "))";
             System.out.println ( createWantTableSQL );
-            statement.executeUpdate ( createWantTableSQL );
+            statementWant.executeUpdate ( createWantTableSQL );
             System.out.println ( "Created Want Table..." );
 
             String addMoreSQL = "INSERT INTO " + WANT_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES ('Gaming PC', 500, 3)";
-            statement.executeUpdate ( addMoreSQL );
+            statementWant.executeUpdate ( addMoreSQL );
             addMoreSQL = "INSERT INTO " + WANT_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES('Astrology Book', 150, 2)";
-            statement.executeUpdate ( addMoreSQL );
+            statementWant.executeUpdate ( addMoreSQL );
             addMoreSQL = "INSERT INTO " + WANT_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES ('Hover Board', 300, 1)";
-            statement.executeUpdate ( addMoreSQL );
+            statementWant.executeUpdate ( addMoreSQL );
         }
             if ( ! xmasTableOneExists ( ) ) {
 
@@ -134,16 +138,16 @@ public class XmasDB {
                 System.out.println ( createNeedTableSQL );
 
 
-                statement.executeUpdate ( createNeedTableSQL );
+                statementNeed.executeUpdate ( createNeedTableSQL );
 
                 System.out.println ( "Created Need table..." );
 
                 String addDataSQL = "INSERT INTO " + NEED_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES ('New Winter Boots', 85, 3)";
-                statement.executeUpdate ( addDataSQL );
+                statementNeed.executeUpdate ( addDataSQL );
                 addDataSQL = "INSERT INTO " + NEED_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES('New Car', 3000, 2)";
-                statement.executeUpdate ( addDataSQL );
+                statementNeed.executeUpdate ( addDataSQL );
                 addDataSQL = "INSERT INTO " + NEED_TABLE_NAME + "(" + NAME_COLUMN + ", " + PRICE_COLUMN + ", " + PRIORITY_COLUMN + ")" + " VALUES ('Gift Card to Grocery Store', 300, 1)";
-                statement.executeUpdate ( addDataSQL );
+                statementNeed.executeUpdate ( addDataSQL );
             }
             return true;
 
@@ -157,7 +161,7 @@ public class XmasDB {
     private static boolean xmasTableOneExists () throws SQLException {
 
         String checkNeedTablePresentQuery = "SHOW TABLES LIKE '" + NEED_TABLE_NAME + "'";   //Can query the database schema
-        ResultSet tablesRS = statement.executeQuery ( checkNeedTablePresentQuery );
+        ResultSet tablesRS = statementNeed.executeQuery ( checkNeedTablePresentQuery );
 
         return tablesRS.next ( );
 
@@ -167,7 +171,7 @@ public class XmasDB {
 
         String checkNeedTablePresentQuery = "SHOW TABLES LIKE '" + WANT_TABLE_NAME + "'";
 
-        ResultSet tableTwoRS = statement.executeQuery ( checkNeedTablePresentQuery );
+        ResultSet tableTwoRS = statementNeed.executeQuery ( checkNeedTablePresentQuery );
 
         return tableTwoRS.next ( );
 
@@ -186,8 +190,17 @@ public class XmasDB {
         }
 
         try {
-            if ( statement != null ) {
-                statement.close ( );
+            if ( statementWant != null ) {
+                statementWant.close ( );
+                System.out.println ( "Statement closed" );
+            }
+        } catch (SQLException se) {
+            //Closing the connection could throw an exception too
+            se.printStackTrace ( );
+        }
+        try {
+            if ( statementNeed != null ) {
+                statementNeed.close ( );
                 System.out.println ( "Statement closed" );
             }
         } catch (SQLException se) {

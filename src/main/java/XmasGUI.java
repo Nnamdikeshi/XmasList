@@ -47,7 +47,7 @@ public class XmasGUI extends JFrame implements WindowListener {
         needTable.setModel ( xmasDataNeedModel );
 
         wantTable.setGridColor ( Color.YELLOW );
-        wantTable.setModel ( xmasDataNeedModel );
+        wantTable.setModel ( xmasDataWantModel );
 
         //Set up the priority spinner.
         //SpinnerNumberModel constructor arguments: spinner's initial value, min, max, step.
