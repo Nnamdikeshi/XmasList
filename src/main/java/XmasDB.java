@@ -19,7 +19,7 @@ public class XmasDB {
     public final static int ITEM_MAX_PRIORITY = 10;
     static final String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
     static final String USER = "root";   //TODO replace with your username
-    static final String PASS = "*******";   //TODO replace with your password
+    static final String PASS = "******";   //TODO replace with your password
     static private final String DB_NAME = "xmas";
 
     static Statement statementWant = null;

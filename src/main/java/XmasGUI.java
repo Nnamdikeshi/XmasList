@@ -48,11 +48,8 @@ public class XmasGUI extends JFrame implements WindowListener {
         addWindowListener ( this );
         setVisible ( true );
         setDefaultCloseOperation ( WindowConstants.EXIT_ON_CLOSE );
-//        String chime = "jingleBells.mp3";
-//        Media hit = new Media (chime);
-//        MediaPlayer mediaPlayer = new MediaPlayer ( hit );
-//        mediaPlayer.play();
 
+        Music.music ( );
         //Set up JTables
         needTable.setGridColor ( Color.BLUE );
         needTable.setModel ( xmasDataNeedModel );
@@ -63,6 +60,7 @@ public class XmasGUI extends JFrame implements WindowListener {
         //Set up the priority spinner.
         //SpinnerNumberModel constructor arguments: spinner's initial value, min, max, step.
         prioritySpinner.setModel ( new SpinnerNumberModel ( 1, XmasDB.ITEM_MIN_PRIORITY, XmasDB.ITEM_MAX_PRIORITY, 10 ) );
+
 
 
         deleteButton.addActionListener ( new ActionListener ( ) {
@@ -164,7 +162,7 @@ public class XmasGUI extends JFrame implements WindowListener {
                     String nameData = wantNameIn.getText ( );
 
                     if ( nameData == null || nameData.trim ( ).equals ( "" ) ) {
-                        JOptionPane.showMessageDialog ( rootPane, "Please enter a title for the new movie" );
+                        JOptionPane.showMessageDialog ( rootPane, "Please enter a title for the new Item" );
                         return;
                     }
 
