@@ -1,219 +1,396 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="XmasGUI">
-  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="9" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <tabbedpane id="baba2" binding="needWantPanes">
     <constraints>
-      <xy x="20" y="20" width="537" height="408"/>
+      <xy x="20" y="20" width="710" height="409"/>
     </constraints>
-    <properties>
-      <foreground color="-16711423"/>
-    </properties>
-    <border type="bevel-raised" title-justification="2" title-position="2">
-      <font name="AR JULIAN" size="14" style="0"/>
-    </border>
+    <properties/>
+    <border type="none"/>
     <children>
-      <vspacer id="6cbff">
+      <grid id="de55" binding="needTab" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="8" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="99f66" class="javax.swing.JTextPane" binding="NEEDTABLETextPane1" default-binding="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <text value="**** NEED TABLE ****"/>
-        </properties>
-      </component>
-      <component id="57712" class="javax.swing.JTextPane" binding="WANTTABLETextPane" default-binding="true">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <text value="**** WANT TABLE ****"/>
-        </properties>
-      </component>
-      <component id="8645e" class="javax.swing.JButton" binding="addButton" default-binding="true">
-        <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-16259012"/>
-          <foreground color="-16777216"/>
-          <text value="Add"/>
-        </properties>
-      </component>
-      <component id="65925" class="javax.swing.JButton" binding="transferButton">
-        <constraints>
-          <grid row="8" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-16116760"/>
-          <text value="Transfer"/>
-        </properties>
-      </component>
-      <component id="4ab5e" class="javax.swing.JButton" binding="exitButton" default-binding="true">
-        <constraints>
-          <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-5242648"/>
-          <text value="Exit"/>
-        </properties>
-      </component>
-      <component id="d9c86" class="javax.swing.JRadioButton" binding="radioNeed">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-15996874"/>
-          <text value="NEED"/>
-        </properties>
-      </component>
-      <component id="4216c" class="javax.swing.JRadioButton" binding="radioWant">
-        <constraints>
-          <grid row="5" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-1569266"/>
-          <text value="WANT"/>
-        </properties>
-      </component>
-      <component id="4fcb8" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Want? or Need?"/>
-        </properties>
-      </component>
-      <component id="1755f" class="javax.swing.JTextField" binding="txtNameInput">
-        <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="f0fcf" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Item Name:"/>
-        </properties>
-      </component>
-      <component id="89dac" class="javax.swing.JSpinner" binding="prioritySpinner">
-        <constraints>
-          <grid row="7" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="148f7" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Price"/>
-        </properties>
-      </component>
-      <component id="968b9" class="javax.swing.JTextField" binding="txtPriceInput">
-        <constraints>
-          <grid row="6" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="c7828" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Priority Level: "/>
-        </properties>
-      </component>
-      <component id="2b7c6" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
-        <constraints>
-          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-1567982"/>
-          <text value="Delete"/>
-        </properties>
-      </component>
-      <hspacer id="7d780">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <hspacer id="9d019">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <hspacer id="4da64">
-        <constraints>
-          <grid row="2" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <hspacer id="2de09">
-        <constraints>
-          <grid row="4" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
-      <scrollpane id="213a">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <tabbedpane title="Need"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="48dd2" class="javax.swing.JTable" binding="needTable">
-            <constraints/>
+          <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="7" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
             <properties>
-              <background color="-3473474"/>
-              <font name="Rockwell Extra Bold" size="14" style="2"/>
+              <foreground color="-16711423"/>
             </properties>
-          </component>
+            <border type="bevel-raised" title-justification="2" title-position="2">
+              <font name="AR JULIAN" size="14" style="0"/>
+            </border>
+            <children>
+              <vspacer id="6cbff">
+                <constraints>
+                  <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="99f66" class="javax.swing.JTextPane" binding="NEEDTABLETextPane1" default-binding="true">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <text value="**** NEED TABLE ****"/>
+                </properties>
+              </component>
+              <component id="8645e" class="javax.swing.JButton" binding="addButton" default-binding="true">
+                <constraints>
+                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-16259012"/>
+                  <foreground color="-16777216"/>
+                  <text value="Add"/>
+                </properties>
+              </component>
+              <component id="65925" class="javax.swing.JButton" binding="transferNeedButton">
+                <constraints>
+                  <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-16116760"/>
+                  <text value="Transfer"/>
+                </properties>
+              </component>
+              <component id="4ab5e" class="javax.swing.JButton" binding="exitButton" default-binding="true">
+                <constraints>
+                  <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-5242648"/>
+                  <text value="Exit"/>
+                </properties>
+              </component>
+              <component id="d9c86" class="javax.swing.JRadioButton" binding="radioNeed">
+                <constraints>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-15996874"/>
+                  <text value="NEED"/>
+                </properties>
+              </component>
+              <component id="4216c" class="javax.swing.JRadioButton" binding="radioWant">
+                <constraints>
+                  <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1569266"/>
+                  <text value="WANT"/>
+                </properties>
+              </component>
+              <component id="4fcb8" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Transfer to Need or Want table?"/>
+                </properties>
+              </component>
+              <component id="1755f" class="javax.swing.JTextField" binding="txtNameInput">
+                <constraints>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="f0fcf" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Item Name:"/>
+                </properties>
+              </component>
+              <component id="89dac" class="javax.swing.JSpinner" binding="prioritySpinner">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="148f7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Price"/>
+                </properties>
+              </component>
+              <component id="968b9" class="javax.swing.JTextField" binding="txtPriceInput">
+                <constraints>
+                  <grid row="4" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c7828" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Priority Level: "/>
+                </properties>
+              </component>
+              <component id="2b7c6" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
+                <constraints>
+                  <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-1567982"/>
+                  <text value="Delete"/>
+                </properties>
+              </component>
+              <hspacer id="7d780">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="4da64">
+                <constraints>
+                  <grid row="2" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <scrollpane id="213a">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="48dd2" class="javax.swing.JTable" binding="needTable">
+                    <constraints/>
+                    <properties>
+                      <background color="-3473474"/>
+                      <font name="Rockwell Extra Bold" size="14" style="2"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+              <component id="4585c" class="javax.swing.JLabel" binding="background">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Label"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
-      </scrollpane>
-      <scrollpane id="cbd05">
+      </grid>
+      <grid id="de317" binding="wantPaneTabbed" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <tabbedpane title="Want"/>
         </constraints>
-        <properties>
-          <background color="-86104"/>
-        </properties>
+        <properties/>
         <border type="none"/>
         <children>
-          <component id="d24a0" class="javax.swing.JTable" binding="wantTable">
-            <constraints/>
-            <properties>
-              <background color="-86104"/>
-              <font name="Rockwell Extra Bold" size="14" style="2"/>
-            </properties>
-          </component>
+          <grid id="6e8b9" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="90a38" layout-manager="GridLayoutManager" row-count="7" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-16711423"/>
+                </properties>
+                <border type="bevel-raised" title-justification="2" title-position="2">
+                  <font name="AR JULIAN" size="14" style="0"/>
+                </border>
+                <children>
+                  <vspacer id="f6013">
+                    <constraints>
+                      <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                  <component id="d2227" class="javax.swing.JTextPane" default-binding="true">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <editable value="false"/>
+                      <text value="**** WANT TABLE ****"/>
+                    </properties>
+                  </component>
+                  <component id="7e882" class="javax.swing.JButton" binding="addWantButton">
+                    <constraints>
+                      <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-16259012"/>
+                      <foreground color="-16777216"/>
+                      <text value="Add"/>
+                    </properties>
+                  </component>
+                  <component id="b8c89" class="javax.swing.JButton" binding="transferWantButton">
+                    <constraints>
+                      <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-16116760"/>
+                      <text value="Transfer"/>
+                    </properties>
+                  </component>
+                  <component id="4e6b2" class="javax.swing.JButton" binding="exitTwo">
+                    <constraints>
+                      <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-5242648"/>
+                      <text value="Exit"/>
+                    </properties>
+                  </component>
+                  <component id="99d14" class="javax.swing.JRadioButton">
+                    <constraints>
+                      <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-15996874"/>
+                      <text value="NEED"/>
+                    </properties>
+                  </component>
+                  <component id="b5fe3" class="javax.swing.JRadioButton">
+                    <constraints>
+                      <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1569266"/>
+                      <text value="WANT"/>
+                    </properties>
+                  </component>
+                  <component id="46b3d" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Transfer to Need or Want table?"/>
+                    </properties>
+                  </component>
+                  <component id="26d90" class="javax.swing.JTextField" binding="wantNameIn">
+                    <constraints>
+                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="749e" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Item Name:"/>
+                    </properties>
+                  </component>
+                  <component id="d758f" class="javax.swing.JSpinner" binding="wantPriorityIn">
+                    <constraints>
+                      <grid row="5" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="b6c84" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Price"/>
+                    </properties>
+                  </component>
+                  <component id="be5e1" class="javax.swing.JTextField" binding="wantPriceIn">
+                    <constraints>
+                      <grid row="4" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="64b4b" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Priority Level: "/>
+                    </properties>
+                  </component>
+                  <component id="2ca02" class="javax.swing.JButton" binding="deleteWant">
+                    <constraints>
+                      <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1567982"/>
+                      <text value="Delete"/>
+                    </properties>
+                  </component>
+                  <hspacer id="65a21">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <hspacer id="61906">
+                    <constraints>
+                      <grid row="2" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <scrollpane id="a936b">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-86104"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="fb637" class="javax.swing.JTable" binding="wantTablePaned">
+                        <constraints/>
+                        <properties>
+                          <background color="-86104"/>
+                          <font name="Rockwell Extra Bold" size="14" style="2"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="de2eb" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Label"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
         </children>
-      </scrollpane>
-      <component id="4585c" class="javax.swing.JLabel" binding="background">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Label"/>
-        </properties>
-      </component>
+      </grid>
     </children>
-  </grid>
+  </tabbedpane>
   <buttonGroups>
     <group name="buttonGroup1">
       <member id="d9c86"/>

@@ -139,6 +139,7 @@ public class XmasDataWantModel extends AbstractTableModel{
 
         try {
             //Move to insert row, insert the appropriate data in each column, insert the row, move cursor back to where it was before we started
+
             wantResultSet.moveToInsertRow ( );
             wantResultSet.updateString ( XmasDB.NAME_COLUMN, name );
             wantResultSet.updateInt ( XmasDB.PRICE_COLUMN, price );
@@ -155,6 +156,27 @@ public class XmasDataWantModel extends AbstractTableModel{
         }
 
     }
+
+//    public boolean trsnferRow ( String name, int price, int priority ) {
+//
+//        try {
+//            wantResultSet.moveToInsertRow ( );
+//            wantResultSet.updateString ( XmasDB.NAME_COLUMN, name );
+//            wantResultSet.updateInt ( XmasDB.PRICE_COLUMN, price );
+//            wantResultSet.updateInt ( XmasDB.PRIORITY_COLUMN, priority );
+//            wantResultSet.insertRow ( );
+//            wantResultSet.moveToCurrentRow ( );
+//            fireTableDataChanged ( );
+//            return true;
+//
+//        } catch (SQLException e) {
+//            System.out.println ( "Error Trsnfering row" );
+//            System.out.println ( e );
+//            return false;
+//        }
+//
+//    }
+
 
     @Override
     public String getColumnName ( int col ) {

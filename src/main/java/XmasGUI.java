@@ -12,11 +12,9 @@ public class XmasGUI extends JFrame implements WindowListener {
     public JPanel rootPanel;
     private JTable needTable;
     private JTextPane NEEDTABLETextPane1;
-    private JTextPane WANTTABLETextPane;
-    private JTable wantTable;
     private JButton addButton;
     private JButton exitButton;
-    private JButton transferButton;
+    private JButton transferNeedButton;
     private JRadioButton radioNeed;
     private JRadioButton radioWant;
     private JTextField txtNameInput;
@@ -24,13 +22,26 @@ public class XmasGUI extends JFrame implements WindowListener {
     private JTextField txtPriceInput;
     private JButton deleteButton;
     private JLabel background;
+    private JTabbedPane needWantPanes;
+    private JTable wantTablePaned;
+    private JPanel needTab;
+    private JPanel wantPaneTabbed;
+    private JTextField wantNameIn;
+    private JTextField wantPriceIn;
+    private JSpinner wantPriorityIn;
+    private JButton addWantButton;
+    private JButton exitTwo;
+    private JButton deleteWant;
+    private JButton transferWantButton;
+    private JTabbedPane needWantTabbed;
+
 
     XmasGUI ( final XmasDataNeedModel xmasDataNeedModel, final XmasDataWantModel xmasDataWantModel ) {
 
         super ( "Christmas List Database Application" );
         background.setIcon ( new ImageIcon ( "christmas.jpg" ) );
         //rootPanel.add(background);
-        setContentPane ( rootPanel );
+        setContentPane ( needWantPanes );
 
         validate ( );
         pack ( );
@@ -46,20 +57,14 @@ public class XmasGUI extends JFrame implements WindowListener {
         needTable.setGridColor ( Color.BLUE );
         needTable.setModel ( xmasDataNeedModel );
 
-        wantTable.setGridColor ( Color.YELLOW );
-        wantTable.setModel ( xmasDataNeedModel );
+        wantTablePaned.setGridColor ( Color.YELLOW );
+        wantTablePaned.setModel ( xmasDataWantModel );
 
         //Set up the priority spinner.
         //SpinnerNumberModel constructor arguments: spinner's initial value, min, max, step.
         prioritySpinner.setModel ( new SpinnerNumberModel ( 1, XmasDB.ITEM_MIN_PRIORITY, XmasDB.ITEM_MAX_PRIORITY, 10 ) );
 
-        exitButton.addActionListener ( new ActionListener ( ) {
-            @Override
-            public void actionPerformed ( ActionEvent e ) {
-                XmasDB.shutdown ( );
-                System.exit ( 0 );
-            }
-        } );
+
         deleteButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
@@ -75,59 +80,159 @@ public class XmasGUI extends JFrame implements WindowListener {
                 //boolean deletedTwo = xmasDataNeedModel.deleteRow ( currentWantRow );
 
                 if ( deletedOne /*|| deletedTwo*/ ) {
-                            XmasDB.loadAllItems ( );
-                        } else {
-                            JOptionPane.showMessageDialog ( rootPane, "Error deleting item" );
-                        }
+                    XmasDB.loadAllItems ( );
+                } else {
+                    JOptionPane.showMessageDialog ( rootPane, "Error deleting item" );
+                }
 
+            }
+        } );
+        deleteWant.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                if ( wantPaneTabbed.isShowing ( ) ) {
+                    int currentWantRow = wantTablePaned.getSelectedRow ( );
+                    //int currentWantRow = wantTable.getSelectedRow ( );
+
+                    if ( currentWantRow == - 1 /*&& currentWantRow == -1*/ ) {      // -1 means no row is selected. Display error message.
+                        JOptionPane.showMessageDialog ( rootPane, "Please choose an item to delete" );
+                    }
+                    boolean deletedOne = xmasDataWantModel.deleteRow ( currentWantRow );
+
+                    //if ( currentWantRow == 1 ) {
+                    //boolean deletedTwo = xmasDataNeedModel.deleteRow ( currentWantRow );
+
+                    if ( deletedOne /*|| deletedTwo*/ ) {
+                        XmasDB.loadAllItems ( );
+                    } else {
+                        JOptionPane.showMessageDialog ( rootPane, "Error deleting item" );
+                    }
+                }
             }
         } );
         addButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 //Get name, make sure it's not blank
-                String nameData = txtNameInput.getText();
+                if ( needTab.isShowing ( ) ) {
+                    String nameData = txtNameInput.getText ( );
 
-                if (nameData == null || nameData.trim().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Please enter a title for the new movie");
-                    return;
-                }
-
-                //get price
-                int priceData;
-
-                try {
-                    priceData = Integer.parseInt(txtPriceInput.getText());
-                    if ( priceData > 5000 ) {
-                        throw new NumberFormatException("This Christmas list will only include prices below $5,000.00");
+                    if ( nameData == null || nameData.trim ( ).equals ( "" ) ) {
+                        JOptionPane.showMessageDialog ( rootPane, "Please enter a title for the new movie" );
+                        return;
                     }
-                } catch (NumberFormatException ne) {
-                    JOptionPane.showMessageDialog(rootPane,
-                            "Change your price to be between 0 & 5,000...");
-                    return;
-                }
 
-                //Using a spinner means we are guaranteed to get a number in the range we set, so no validation needed.
-                int priorityData = (Integer)(prioritySpinner.getValue());
+                    //get price
+                    int priceData;
 
-                System.out.println("Adding " + nameData + " " + priceData + " " + priorityData);
-                if (radioNeed.isSelected ()) {
-                    boolean insertedNeedRow = xmasDataNeedModel.insertRow ( nameData, priceData, priorityData );
+                    try {
+                        priceData = Integer.parseInt ( txtPriceInput.getText ( ) );
+                        if ( priceData > 5000 ) {
+                            throw new NumberFormatException ( "This Christmas list will only include prices below $5,000.00" );
+                        }
+                    } catch (NumberFormatException ne) {
+                        JOptionPane.showMessageDialog ( rootPane,
+                                "Change your price to be between 0 & 5,000..." );
+                        return;
+                    }
 
-                    if ( ! insertedNeedRow ) {
-                        JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to  Need list" );
+                    //Using a spinner means we are guaranteed to get a number in the range we set, so no validation needed.
+                    int priorityData = (Integer) ( prioritySpinner.getValue ( ) );
+
+                    System.out.println ( "Adding " + nameData + " " + priceData + " " + priorityData );
+                    if ( radioNeed.isSelected ( ) ) {
+                        boolean insertedNeedRow = xmasDataNeedModel.insertRow ( nameData, priceData, priorityData );
+
+                        if ( ! insertedNeedRow ) {
+                            JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to  Need list" );
+                        }
+                    }
+                    if ( radioWant.isSelected ( ) ) {
+                        boolean insertedWantRow = xmasDataWantModel.insertRow ( nameData, priceData, priorityData );
+                        if ( ! insertedWantRow ) {
+                            JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to Want list" );
+                        }
                     }
                 }
-                if ( radioWant.isSelected ( ) ) {
+            }
+
+        });
+        addWantButton.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                if ( wantPaneTabbed.isShowing ( ) ) {
+                    String nameData = wantNameIn.getText ( );
+
+                    if ( nameData == null || nameData.trim ( ).equals ( "" ) ) {
+                        JOptionPane.showMessageDialog ( rootPane, "Please enter a title for the new movie" );
+                        return;
+                    }
+
+                    //get price
+                    int priceData;
+
+                    try {
+                        priceData = Integer.parseInt ( wantPriceIn.getText ( ) );
+                        if ( priceData > 5000 ) {
+                            throw new NumberFormatException ( "This Christmas list will only include prices below $5,000.00" );
+                        }
+                    } catch (NumberFormatException ne) {
+                        JOptionPane.showMessageDialog ( rootPane,
+                                "Change your price to be between 0 & 5,000..." );
+                        return;
+                    }
+
+                    //Using a spinner means we are guaranteed to get a number in the range we set, so no validation needed.
+                    int priorityData = (Integer) ( wantPriorityIn.getValue ( ) );
+
+                    System.out.println ( "Adding " + nameData + " " + priceData + " " + priorityData );
+
                     boolean insertedWantRow = xmasDataWantModel.insertRow ( nameData, priceData, priorityData );
                     if ( ! insertedWantRow ) {
                         JOptionPane.showMessageDialog ( rootPane, "Error adding new Item to Want list" );
                     }
                 }
-                // If insertedRow is true and the data was added, it should show up in the table, so no need for confirmation message.
             }
+        } );
 
-        });
+        transferNeedButton.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                //
+                if ( radioNeed.isSelected ( ) ) {
+                    int currentNeedRow = needTable.getSelectedRow ( );
+                    if ( currentNeedRow == - 1 /*&& currentWantRow == -1*/ ) {      // -1 means no row is selected. Display error message.
+                        JOptionPane.showMessageDialog ( rootPane, "Please choose an item to transfer" );
+                    }
+                    wantTablePaned.addRowSelectionInterval ( currentNeedRow, + 2 );
+                }
+            }
+        } );
+
+        transferWantButton.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+
+            }
+        } );
+
+        exitButton.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                XmasDB.shutdown ( );
+                System.exit ( 0 );
+            }
+        } );
+        exitTwo.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                XmasDB.shutdown ( );
+                System.exit ( 0 );
+            }
+        } );
+
+
+
     }
 
 
